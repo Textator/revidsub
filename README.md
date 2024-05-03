@@ -16,14 +16,22 @@ main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\example-video.s01e01-1080p.nfo
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs\example-video.s01e01-1080p-eng.idx
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs\example-video.s01e01-1080p-eng.sub
+main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs\example-video.s01e01-1080p-eng-forced.idx
+main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs\example-video.s01e01-1080p-eng-forced.sub
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs\example-video.s01e01-1080p.idx
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs\example-video.s01e01-1080p.sub
+main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs\example-video.s01e01-1080p-forced.idx
+main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\Subs\example-video.s01e01-1080p-forced.sub
 ```
 #### After:
 ```
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.mkv
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.eng.idx
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.eng.sub
+main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.eng.forced.idx
+main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.eng.forced.sub
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.deu.idx
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.deu.sub
+main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.deu.forced.idx
+main_folder\Video.S01E01.German.DL.1080p-EXAMPLE.deu.forced.sub
 ```
