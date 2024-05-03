@@ -5,17 +5,29 @@ CLS
 FOR /D /R %%# in (*) DO (
     ::CD (every) dir found and store dir name in VAR %%#
     SET movieName=%%~xn#
-    ECHO movie/series name dir: [95m^!movieName![0m
+    ECHO video file dir name: [95m^!movieName![0m
     PUSHD "%%#"
     ::rename forced to eng-forced if ENG language specified
+    ::* wildcard for 0 or more characters
+    ::? wildcard for 1 character only, but not DOT <.> - see: https://ss64.com/nt/syntax-wildcards.html
     IF EXIST subs\*eng-forced.* (
-    ECHO forced-eng exists
-    FOR %%1 in ("subs\*eng-forced.idx" "subs\*eng-forced.sub") DO (
+	ECHO forced-eng exists
+	FOR %%1 in ("subs\*eng-forced.idx" "subs\*eng-forced.sub") DO (
         ECHO Moving:
         ECHO "%%~f1"
         ECHO TO:
-        ECHO !movieName!.eng-forced%%~x1
-        MOVE "%%1" "!movieName!.eng-forced%%~x1"
+        ECHO !movieName!.eng.forced%%~x1
+        MOVE "%%1" "!movieName!.eng.forced%%~x1"
+		)
+    )
+    IF EXIST subs\*eng.forced.* (
+	ECHO forced.eng exists
+    FOR %%1 in ("subs\*eng.forced.idx" "subs\*eng.forced.sub") DO (
+        ECHO Moving:
+        ECHO "%%~f1"
+        ECHO TO:
+        ECHO !movieName!.eng.forced%%~x1
+        MOVE "%%1" "!movieName!.eng.forced%%~x1"
 		)
     )
     ::rename "*eng.idx|*eng.sub" to "*.eng.idx|*.eng.sub" if ENG language specified
@@ -31,11 +43,10 @@ FOR /D /R %%# in (*) DO (
 	)
         ::## WARNING! ##
 		::files without language attribute will be considered DEU for lack of working string search in file
-		::find would have to be executed in .idx but also .sub has to be renamed accordingly
+		::find would have to be executed in .idx - also .sub has to be renamed accordingly (i.e. *.deu.sub)
 		::therefore the attribute less files be checked and renamed at the end, so it works only for DEU files, assuming they are acctually DEU
     ::rename "*.idx|*.sub" to "*.deu.idx|*.deu.sub" if NO language specified
     FOR %%3 in ("subs\*.idx") DO (
-			::doesn't work as expected!
 			FIND /I "id: de" %%~f3
 			IF !errorlevel! EQU 0 (
 				ECHO Errorlevel: !errorlevel!
@@ -44,13 +55,20 @@ FOR /D /R %%# in (*) DO (
 				ECHO "%%~f3"
 				ECHO TO:
 				ECHO !movieName!.deu%%~x3
-				MOVE "%%3" "!movieName!.deu%%~x3" ) ELSE ( ECHO FIND-command errorlevel: !errorlevel!
-				ECHO [95m^Error! No "id: de" found in .idx file. Exiting batch, check folders and files manually![0m
+				MOVE "%%3" "!movieName!.deu%%~x3"
+				ECHO Moving SUBS:
+				ECHO "%%~f3"
+				ECHO TO:
+				ECHO %%~p#%%~nx3
+				::MOVE "%%#"\"%%s" %%~p#%%~nxs
+				MOVE "%%#"\"%%3" ..\%%~nx3 ) ELSE ( ECHO FIND-command errorlevel: !errorlevel!
+				ECHO [95m^Error: [0m"id: de" [95m^not found in .idx:[0m "%%3"
+				ECHO [95m^Exiting batch, check folders and files manually![0m
 				PAUSE
 				EXIT
 				) 
 			) 
-		::rename "*.sub" to "*.deu.sub" if NO language specified
+		::rename "*.sub" to "*.deu.sub" if NO language specified according to above
 			FOR %%d in ("subs\*.idx" "subs\*.sub") DO (
 					ECHO Moving:
 					ECHO "%%~fd"
@@ -63,8 +81,8 @@ FOR /D /R %%# in (*) DO (
         ECHO Moving:
         ECHO "%%~f4"
         ECHO TO:
-        ECHO !movieName!.deu-forced%%~x4
-        MOVE "%%4" "!movieName!.deu-forced%%~x4"
+        ECHO !movieName!.deu.forced%%~x4
+        MOVE "%%4" "!movieName!.deu.forced%%~x4"
     )
     
 	::move SUB FILES one folder up, NO more renaming
@@ -88,16 +106,40 @@ FOR /D /R %%# in (*) DO (
         ::MOVE "%%#"\"%%@" %%~p#%%~nx#%%~x@
         MOVE "%%#"\"%%@" ..\%%~nx#%%~x@
 		)
-    ECHO deleting .NFO file
-    IF EXIST *.nfo 2> nul DEL *.nfo ELSE ECHO no .nfo file found
-    
-    ECHO deleting SAMPLE folder
-    IF EXIST Sample 2> nul RD sample /Q /S ELSE	ECHO no sample folder found
-    
-    ECHO deleting PROOF folder
-    IF EXIST RD proof 2> nul RD proof /Q /S ELSE ECHO no proof folder found
-	POPD
 	
+	::delete left overs	
+    ECHO looking for left over files and dirs and delete them
+			IF EXIST *.nfo (
+    ECHO deleting .NFO file
+    DEL *.nfo
+    ) ELSE (
+    ECHO no .nfo file found
+    )
+        IF EXIST *.jpg (
+    ECHO deleting .JPG file
+    DEL *.JPG
+    ) ELSE (
+    ECHO no .JPG file found
+    )
+            IF EXIST *.SVF (
+    ECHO deleting .SVF file
+    DEL *.SVF
+    ) ELSE (
+    ECHO no .SVF file found
+    )
+       		IF EXIST Sample\ (
+    ECHO deleting SAMPLE folder
+    RD sample\ /Q /S
+    ) ELSE (
+    ECHO no SAMPLE folder found
+    )    
+    		IF EXIST proof\ (
+    ECHO deleting PROOF folder
+    RD proof\ /Q /S
+    ) ELSE (
+    ECHO no PROOF folder found
+    )
+		POPD
 	ECHO deleting base folder %%#
 	RD %%# /Q
 )
