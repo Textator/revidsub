@@ -36,7 +36,7 @@ FOR /D /R %%# in (*) DO (
     ::rename "*.idx|*.sub" to "*.deu.idx|*.deu.sub" if NO language specified
     FOR %%3 in ("subs\*.idx") DO (
 			::doesn't work as expected!
-			@FIND /I "id: de" %%~f3
+			FIND /I "id: de" %%~f3
 			IF !errorlevel! EQU 0 (
 				ECHO Errorlevel: !errorlevel!
 				ECHO found "id: de" in %%3
