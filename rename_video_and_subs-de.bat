@@ -30,9 +30,9 @@ FOR /D /R %%# in (*) DO (
 		)
 	)
         ::## WARNING! ##
-		::files without language attribute (i.e. *1080.idx and NOT *1080-eng.idx) will be considered DEU for lack of working string search in file
+		::files without language attribute will be considered DEU for lack of working string search in file
 		::find would have to be executed in .idx but also .sub has to be renamed accordingly
-		::therefore the attributeless files be checked and renamed at the end, so it works only for DEU files, assuming they are acctually DEU
+		::therefore the attribute less files be checked and renamed at the end, so it works only for DEU files, assuming they are acctually DEU
     ::rename "*.idx|*.sub" to "*.deu.idx|*.deu.sub" if NO language specified
     FOR %%3 in ("subs\*.idx") DO (
 			::doesn't work as expected!
@@ -44,9 +44,7 @@ FOR /D /R %%# in (*) DO (
 				ECHO "%%~f3"
 				ECHO TO:
 				ECHO !movieName!.deu%%~x3
-				MOVE "%%3" "!movieName!.deu%%~x3"
-				) ELSE (
-				ECHO FIND-command errorlevel: !errorlevel!
+				MOVE "%%3" "!movieName!.deu%%~x3" ) ELSE ( ECHO FIND-command errorlevel: !errorlevel!
 				ECHO [95m^Error! No "id: de" found in .idx file. Exiting batch, check folders and files manually![0m
 				PAUSE
 				EXIT
