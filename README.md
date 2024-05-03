@@ -1,7 +1,7 @@
 # revidsub
 Windows CMD batch to rename video (.mkv, .mp4, .avi, .wmv) like parent directory and rename subtitle files (.idx, .sub) accordingly and move them to the same (upper) directory and delete uneccessary files.
 
-**Using *FIND* to determine language of .idx (does it contain string "id: de") doesn't work, yet. So for now it's assumend, the .idx without language attribute is de/DEU/German **
+Using *FIND* to determine language of .idx (does it contain string "id: de") doesn't work, yet. So for now it's assumend, the .idx without language attribute is de/DEU/German
 
 ## Example
 #### Before:
