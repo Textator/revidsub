@@ -1,5 +1,5 @@
 # revidsub
-Windows CMD batch to rename video (.mkv, .mp4, .avi, .wmv) like parent directory and rename subtitle files (.idx, .sub) accordingly and move them to the same (upper) directory and delete uneccessary files.
+Windows CMD batch to rename video (.mkv, .mp4, .avi, .wmv) like parent directory and rename VobSub subtitle files (.idx, .sub) accordingly and move them to the same (upper) directory and delete uneccessary files.
 
 **Warning!**
 Using *FIND* to determine language of .idx (does it contain string "id: de").
