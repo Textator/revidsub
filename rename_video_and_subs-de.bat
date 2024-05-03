@@ -121,11 +121,11 @@ FOR /D /R %%# in (*) DO (
     ) ELSE (
     ECHO no .JPG file found
     )
-            IF EXIST *.SVF (
-    ECHO deleting .SVF file
-    DEL *.SVF
+            IF EXIST *.SFV (
+    ECHO deleting .SFV file
+    DEL *.SFV
     ) ELSE (
-    ECHO no .SVF file found
+    ECHO no .SFV file found
     )
        		IF EXIST Sample\ (
     ECHO deleting SAMPLE folder
