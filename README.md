@@ -1,8 +1,9 @@
 # revidsub
 Windows CMD batch to rename video (.mkv, .mp4, .avi, .wmv) like parent directory and rename subtitle files (.idx, .sub) accordingly and move them to the same (upper) directory and delete uneccessary files.
 
-## Example
+**Using * *FIND* * doesn't work, yet.**
 
+## Example
 #### Before:
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\example-video.s01e01-1080p.mkv
 main_folder\Video.S01E01.German.DL.1080p-EXAMPLE\example-video.s01e01-1080p.nfo
