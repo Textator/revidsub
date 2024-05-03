@@ -32,7 +32,7 @@ FOR /D /R %%# in (*) DO (
         ::## WARNING! ##
 		::files without language attribute will be considered DEU for lack of working string search in file
 		::find would have to be executed in .idx but also .sub has to be renamed accordingly
-		::therefore the attribute less files be checked and renamed at the end, so it works only for DEU files, assuming they are acctually DEU
+		::therefore the attributeless files be checked and renamed at the end, so it works only for DEU files, assuming they are acctually DEU
     ::rename "*.idx|*.sub" to "*.deu.idx|*.deu.sub" if NO language specified
     FOR %%3 in ("subs\*.idx") DO (
 			::doesn't work as expected!
